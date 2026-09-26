@@ -9,8 +9,10 @@ alert('你打开的网页极度危险，可能会包含潜在的垃圾文件与�
 
 <style>
   body { background-color: #ff0000; }
+  #unlock-msg { display: none; font-size: 5rem; color: white; text-align: center; margin-top: 200px; }
 </style>
 
+<div id="lock-content">
 <p style="font-size: 5rem;" id="a">⚠️本机已锁，火速打钱⚠️</p>
 <p style="font-size: 4rem;" id="b">🔵关机/重启手机必废</p>
 <p style="font-size: 4rem;" id="c">🟡想变板砖，你就可以试试</p>
@@ -22,9 +24,9 @@ alert('你打开的网页极度危险，可能会包含潜在的垃圾文件与�
 <p style="font-size: 4rem;" id="i">转500解锁</p>
 <p style="font-size: 5rem;" id="j">⬇️请输入密码⬇️</p>
 
-<input type="password" style="font-size: 4rem; color: #ffffff; background-color: #ff0000;"/>
+<input type="password" id="pwd-input" style="font-size: 4rem; color: #ffffff; background-color: #ff0000;"/>
 
-<button style="
+<button id="check-btn" style="
     width: 800px;
     height: 100px;
     font-size: 50px;
@@ -32,21 +34,29 @@ alert('你打开的网页极度危险，可能会包含潜在的垃圾文件与�
     background-color: #000000;
     border: none;
     border-radius: 5px;
-    cursor: pointer;"
-button onclick="alert('密码错误，请重新输入！')"
-">确定</button>
+    cursor: pointer;">确定</button>
+</div>
+
+<p id="unlock-msg" style="font-size: 5rem; color: white; text-align: center; margin-top: 200px;">🎉 解锁成功！欢迎回来 🎉</p>
+<p id="exit-msg" style="font-size: 4rem; color: white; text-align: center; margin-top: 50px; display: none;">你现在可以退出此网页</p>
 
 <script>
+var ids = ['a','b','c','d','e','f','g','h','i','j'];
+for (var k = 0; k < ids.length; k++) {
+    document.getElementById(ids[k]).style.color = "white";
+}
 
-a.style.color="white"
-b.style.color="white"
-c.style.color="white"
-d.style.color="white"
-e.style.color="white"
-f.style.color="white"
-g.style.color="white"
-h.style.color="white"
-i.style.color="white"
-j.style.color="white"
+var CORRECT_PWD = '1234509876MJHmjh';
 
+document.getElementById('check-btn').onclick = function() {
+    var input = document.getElementById('pwd-input').value;
+    if (input === CORRECT_PWD) {
+        document.getElementById('lock-content').style.display = 'none';
+        document.getElementById('unlock-msg').style.display = 'block';
+        document.getElementById('exit-msg').style.display = 'block';
+    } else {
+        alert('密码错误，请重新输入！');
+    }
+};
 </script>
+</html>
